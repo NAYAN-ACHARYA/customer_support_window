@@ -147,25 +147,31 @@ const ChatInput = ({
       )}
 
       {/* Editor input */}
-      <div 
-        className="chat-input"
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setTimeout(() => setIsFocused(false), 150)}
-      >
-        {isEditorEmpty && (
-          <div
-            style={{
-              position: "absolute",
-              color: "grey",
-              padding: "8px",
-              pointerEvents: "none",
-            }}
-          >
-            Start typing...
-          </div>
-        )}
-        <EditorContent editor={editor} />
-      </div>
+      <div
+  className="chat-input"
+  onFocus={() => setIsFocused(true)}
+  onBlur={() => setTimeout(() => setIsFocused(false), 150)}
+  style={{
+    position: "relative",
+    maxHeight: "150px",   // or any height you prefer
+    overflowY: "auto",
+  }}
+>
+  {isEditorEmpty && (
+    <div
+      style={{
+        position: "absolute",
+        color: "grey",
+        padding: "8px",
+        pointerEvents: "none",
+      }}
+    >
+      Start typing...
+    </div>
+  )}
+  <EditorContent editor={editor} />
+</div>
+
 
       {/* Chat toolbar */}
       <div

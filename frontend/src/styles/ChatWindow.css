@@ -160,7 +160,7 @@
   border: 1px solid #ccc;
   border-radius: 6px;
   min-height: 58px;
-  max-height: 100%;     /* use full height of parent */
+  max-height: 50%;     /* use full height of parent */
   overflow-y: auto;
   cursor: text;
 }
