@@ -1,6 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { FaSmile, FaPaperclip, FaMicrophone } from "react-icons/fa";
 import chatResponse from "../chatResponse";
+import ChatInput from "./ChatInput";
+import MessageList from "./MessageList";
 
 const ChatWindow = ({
   selectedChat,
@@ -13,6 +15,7 @@ const ChatWindow = ({
 }) => {
   const textareaRef = useRef(null);
   const chatEndRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleTextSend = () => {
     if (!message.trim()) return;
@@ -48,87 +51,25 @@ const ChatWindow = ({
   return (
     <div className="chat-window">
       <div className="chat-header">{selectedChat.name}</div>
+
       <div className="chat-messages" style={{ overflowY: "auto", flex: 1 }}>
-        {selectedChat.messages && selectedChat.messages.length > 0 ? (
-          selectedChat.messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`message-wrapper ${
-                msg.sender === "You" ? "agent" : "customer"
-              }`}
-              style={{ position: "relative" }}
-            >
-              {msg.sender !== "You" && (
-                <div className="avatar-container">
-                  <div className="avatar-circle">
-                    {msg.sender.charAt(0).toUpperCase()}
-                  </div>
-                </div>
-              )}
-
-              <div
-                className={`message ${
-                  msg.sender === "You" ? "agent" : "customer"
-                }`}
-              >
-                {msg.text}
-              </div>
-
-              {msg.sender === "You" && (
-                <div className="avatar-container">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/44.jpg"
-                    alt="avatar"
-                    className="avatar-image"
-                  />
-                </div>
-              )}
-
-              <button
-                className="hover-btn"
-                onClick={() => {
-                  setcopilotMessage(msg.text);
-                  if (copilotInputRef && copilotInputRef.current) {
-                    copilotInputRef.current.focus();
-                  }
-                }}
-              >
-                Ask Fin Copilot
-              </button>
-            </div>
-          ))
-        ) : (
-          <div className="no-message">No messages yet.</div>
-        )}
-        {/* Dummy div to scroll into view */}
-        <div ref={chatEndRef} />
+        <MessageList
+          messages={selectedChat.messages}
+          setcopilotMessage={setcopilotMessage}
+          copilotInputRef={copilotInputRef}
+          chatEndRef={chatEndRef}
+        />
       </div>
 
       <div className="chat-input-area">
-        <textarea
-          ref={textareaRef}
-          className="chat-input"
-          placeholder="Type a message..."
-          value={message}
-          rows={1}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleTextSend();
-            }
-          }}
+        <ChatInput
+          message={message}
+          setMessage={setMessage}
+          handleTextSend={handleTextSend}
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
+          textareaRef={textareaRef}
         />
-        <div className="chat-toolbar">
-          <div className="chat-icons">
-            <FaSmile className="chat-icon" />
-            <FaPaperclip className="chat-icon" />
-            <FaMicrophone className="chat-icon" />
-          </div>
-          <button className="send-button" onClick={handleTextSend}>
-            Send
-          </button>
-        </div>
       </div>
     </div>
   );
