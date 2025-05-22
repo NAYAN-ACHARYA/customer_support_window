@@ -9,7 +9,7 @@ const ChatWindow = ({
   handleMessageSend,
   setSelectedChat,
   setcopilotMessage,
-  copilotInputRef
+  copilotInputRef,
 }) => {
   const textareaRef = useRef(null);
   const chatEndRef = useRef(null);
@@ -53,23 +53,48 @@ const ChatWindow = ({
           selectedChat.messages.map((msg, index) => (
             <div
               key={index}
-              className={`message-wrapper ${msg.sender === "You" ? "agent" : "customer"}`}
+              className={`message-wrapper ${
+                msg.sender === "You" ? "agent" : "customer"
+              }`}
               style={{ position: "relative" }}
             >
-              <div className={`message ${msg.sender === "You" ? "agent" : "customer"}`}>
+              {msg.sender !== "You" && (
+                <div className="avatar-container">
+                  <div className="avatar-circle">
+                    {msg.sender.charAt(0).toUpperCase()}
+                  </div>
+                </div>
+              )}
+
+              <div
+                className={`message ${
+                  msg.sender === "You" ? "agent" : "customer"
+                }`}
+              >
                 {msg.text}
               </div>
-          <button
-             className="hover-btn"
-              onClick={() => {
-               setcopilotMessage(msg.text);
-              if (copilotInputRef && copilotInputRef.current) {
-               copilotInputRef.current.focus();
-             }
-           }}
->
-  Ask Fin Copilot
-</button>
+
+              {msg.sender === "You" && (
+                <div className="avatar-container">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt="avatar"
+                    className="avatar-image"
+                  />
+                </div>
+              )}
+
+              <button
+                className="hover-btn"
+                onClick={() => {
+                  setcopilotMessage(msg.text);
+                  if (copilotInputRef && copilotInputRef.current) {
+                    copilotInputRef.current.focus();
+                  }
+                }}
+              >
+                Ask Fin Copilot
+              </button>
             </div>
           ))
         ) : (
