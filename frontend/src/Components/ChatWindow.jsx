@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import { FaSmile, FaPaperclip, FaMicrophone } from "react-icons/fa";
 import chatResponse from "../chatResponse";
 import ChatInput from "./ChatInput";
 import MessageList from "./MessageList";
@@ -11,7 +10,7 @@ const ChatWindow = ({
   handleMessageSend,
   setSelectedChat,
   setcopilotMessage,
-  copilotInputRef,
+  copilotInputRef
 }) => {
   const textareaRef = useRef(null);
   const chatEndRef = useRef(null);
@@ -32,7 +31,7 @@ const ChatWindow = ({
     }, 1000);
   };
 
-  // Auto-resize textarea
+  // Auto-resize textarea (if you want to keep it, but with TipTap it's mostly managed)
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {

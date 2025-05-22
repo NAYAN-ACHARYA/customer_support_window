@@ -7,6 +7,25 @@
   border-right: 1px solid #ddd;
 }
 
+.floating-box {
+  position: absolute;
+  top: -50px;
+  left: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.formatting-toolbar button {
+  margin-right: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+
 .chat-header {
   font-weight: bold;
   font-size: 1.2em;
@@ -127,31 +146,52 @@
   gap: 10px;
   border-top: 1px solid #ddd;
   padding: 10px;
-  background-color: #fafafa;
+  background-color:white;
+
+  height: 120px; /* or whatever fixed height you want */
 }
 
 .chat-input {
-  width: 100%;
+  flex-grow: 1;          /* fill all vertical space in chat-input-area */
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   font-size: 1.1em;
   border: 1px solid #ccc;
   border-radius: 6px;
   min-height: 58px;
-  max-height: 120px;
-  resize: none;
+  max-height: 100%;     /* use full height of parent */
   overflow-y: auto;
+  cursor: text;
 }
 
-.chat-input:focus {
+/* Target the Tiptap editor's editable content */
+.chat-input .ProseMirror {
+  flex-grow: 1;          /* fill the container */
+  outline: none;
+  min-height: 0;         /* prevent shrinking */
+  overflow-y: auto;      /* allow scrolling inside editor */
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Remove border when focused (optional) */
+.chat-input:focus-within {
+  border-color: #999;
   outline: none;
 }
 
+
+
+
 /* Toolbar with icons and send button */
 .chat-toolbar {
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 
 .chat-icons {
   display: flex;
@@ -169,10 +209,24 @@
   border: none;
   color: #888;
   font-size: 1em;
+  font-weight: bold;
   padding: 8px 12px;
   cursor: pointer;
 }
 
 .send-button:hover {
-  color: #555;
+  color: #b3aeae;
+}
+
+
+.format-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.2s ease;
+}
+
+.format-btn:hover {
+  background-color: #f0f0f0; /* light grey */
 }

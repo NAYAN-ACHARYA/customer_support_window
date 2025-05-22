@@ -52,7 +52,8 @@ const Copilot = ({ copilotMessage, setcopilotMessage ,setMessage,inputRef}) => {
             <div> {chat.text}</div>
             {chat.sender === "Fin AI Copilot" && chat.text !== "Typing..." && (
               <button className="AddToComposer"
-              onClick={() => {setMessage(chat.text);}}>
+              onClick={() => {setMessage(chat.text);
+              }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="16"

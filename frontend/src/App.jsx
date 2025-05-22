@@ -13,7 +13,7 @@ function App() {
   const[copilotMessage,setcopilotMessage]=useState("");
   const [selectedChat, setSelectedChat] = useState(chatsData[0]);
   const [message, setMessage] = useState("");
-  
+
   const handleMessageSend = () => {
     if (message.trim() !== "") {
       const newMessage = {
@@ -47,7 +47,8 @@ function App() {
       <Copilot copilotMessage={copilotMessage}
       inputRef={copilotInputRef}
       setcopilotMessage={setcopilotMessage} 
-      setMessage={setMessage}/>
+      setMessage={setMessage}
+      />
     </div>
   );
 }
