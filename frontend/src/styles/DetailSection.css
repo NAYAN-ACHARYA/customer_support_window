@@ -1,0 +1,98 @@
+.btn-plus {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  user-select: none;
+}
+
+.details-section-wrapper {
+  position: absolute;
+  top: 60px; /* Push it below the header (adjust as needed) */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  background:white;
+  z-index: 1;
+}
+
+
+.details-section {
+  width: 100%;
+  max-width: 400px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: system-ui, sans-serif;
+  color: #374151;
+  font-size: 14px;
+  z-index: 20;
+}
+
+.text-info p {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.accordion-list {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 8px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 12px 0;
+  font-weight: 600;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #111827;
+}
+.accordion-button:focus {
+  outline: none;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.accordion-button svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
+.accordion-content {
+  padding-bottom: 16px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.space-y-2 > * + * {
+  margin-top: 8px;
+}

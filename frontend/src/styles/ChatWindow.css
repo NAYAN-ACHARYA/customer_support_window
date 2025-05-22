@@ -1,0 +1,154 @@
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+}
+
+.chat-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.message-wrapper.agent {
+  justify-content: flex-end; /* align right for your messages */
+}
+
+.message {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+.customer {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+  width:auto;
+}
+
+.agent {
+  background-color: #d1dcff;
+  align-self: flex-end;
+  text-align: right;
+  width: auto;
+}
+
+.no-message {
+  color: #aaa;
+  font-style: italic;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.avatar-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Input area */
+.chat-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-height: 58px;
+  max-height: 120px;
+  resize: none;
+  overflow-y: auto;
+}
+.chat-input:focus {
+  outline: none;
+}
+
+/* Toolbar with icons and send button */
+.chat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-icons {
+  display: flex;
+  gap: 12px;
+  font-size: 1.25em;
+  color: #666;
+}
+
+.chat-icon {
+  cursor: pointer;
+}
+
+.send-button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1em;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  color: #555;
+}
+
+
+.message-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start; /* align left by default */
+  margin-bottom: 10px;
+}
+
+.message-wrapper.agent {
+  justify-content: flex-end; /* align right for your messages */
+}
+
+.hover-btn {
+  position: absolute;
+  background-color:none;
+  font-size: 14px;
+  top: 4px;         /* close to top */
+  right: 4px;       /* close to right */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  /* other styles as before */
+}
+
+
+.message-wrapper:hover .hover-btn {
+  opacity: 1;
+}

@@ -1,0 +1,209 @@
+.copilot-section {
+  position: relative;
+  width: 29%;
+  min-width: 250px;
+  padding: 20px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+.copilot-header {
+  z-index: 2;
+  background: white;
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  border-bottom: 1px solid #e0e0e0; /* Light grey line at the bottom */
+}
+.header-btn1,
+.header-btn2 {
+  font-weight: bold;
+  background-color: white;
+  border: none;
+  border-radius: 0px;
+  transition: all 0.3s ease;
+  position: relative;
+  color: black;
+}
+
+.header-btn1:hover,
+.header-btn2:hover {
+  color: #615c5c;
+}
+
+.header-btn1:focus,
+.header-btn2:focus {
+  outline: none;
+}
+
+.header-btn1:active,
+.header-btn2:active {
+  border: none;
+}
+
+/* Active state with gradient border effect */
+.header-btn1.active,
+.header-btn2.active {
+  color: #4b00b5; /* Darker violet text */
+  background-image: linear-gradient(to right, blue, #9400d3);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 100% 2px;
+}
+
+
+.copilot-body {
+  font-size: 0.95em;
+  margin-bottom: 20px;
+}
+
+.suggested {
+  font-size: 0.85em;
+  margin-bottom: 10px;
+  color: #4b7bec;
+  cursor: pointer;
+}
+
+.copilot-input-wrapper {
+  position: relative;
+  width: 100%;
+  height: 10%;
+  margin-top: 12px;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  border-radius: 8px; /* optional: smooth edges */
+}
+
+.copilot-input-wrapper:focus-within {
+  box-shadow:
+    0 0 16px 4px #e0b3ff,   /* softer violet, a bit stronger */
+    0 0 22px 10px #d1a3ff;  /* stronger violet outer glow */
+  background-color: #f5e6ff; /* soft violet-pink background */
+}
+
+.copilot-input {
+  height: 100%;
+  width: 100%;
+  padding: 10px 40px 10px 12px; /* space on the right for the button */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95em;
+  background: white;
+  color: #333;
+  box-sizing: border-box;
+}
+.copilot-input:focus{
+  outline: none;
+}
+
+.copilot-up-btn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+.copilot-input-wrapper:focus-within .copilot-up-btn {
+  background-color: #0d0118;
+  color: white;
+  box-shadow: 0 0 8px #d1a3ff;
+  border-radius: 6px;
+  height:29px;
+  width:28px;
+}
+
+
+.copilot-up-btn:hover {
+  color: #4b7bec;
+}
+
+.copilot-up-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.copilot-chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border-radius: 12px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background-color: #ffffff;
+  align-self: flex-start;
+  margin-right: auto;
+  color: #6d6d6d;
+  max-width: 100%;
+}
+.user-message-header{
+  color: #111111;
+  font-weight: bold;
+}
+
+.copilot-message {
+  background: linear-gradient(
+    to bottom right,
+    #f3e8ff,  /* very light violet */
+    #ffe4f0   /* very light pink */
+  );
+  align-self: flex-start;
+  margin-right: auto;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 1000%;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.AddToComposer {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 14px;
+  background-color: white;
+  color: black;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.AddToComposer:hover {
+  background-color: #f3f3f3;
+  transform: translateY(-1px);
+}
+
+.composer-icon {
+  width: 16px;
+  height: 16px;
+}
+
+
+
+
+
