@@ -1,21 +1,22 @@
 /* App.css */
 
-html, body {
-  height: 100%;
-  overflow: hidden; /* Prevents scrollbars */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 .app {
   display: flex;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Prevent scrolling inside the .app container */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .app {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .sidebar,
@@ -25,7 +26,6 @@ html, body {
     border-right: none;
     border-bottom: 1px solid #ddd;
   }
-
   .chat-window {
     border-right: none;
   }
