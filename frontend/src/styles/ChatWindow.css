@@ -140,24 +140,20 @@
 }
 
 /* Input Area */
-.chat-input-area {
-  background-color: white;
-  border-top: 1px solid #ddd;
-}
-
 .chat-input {
   border: 1px solid #ccc;
   border-radius: 2px;
-  background-color: transparent;
+  background-color: #fff;  /* Changed from transparent to white */
 }
 
 .chat-input .ProseMirror {
-  background-color: transparent;
+  background-color: #fff; /* Changed from transparent to white */
   border: none;
   outline: none;
   padding-left: 10px;
+  color: #000; /* Explicitly set text color */
+  -webkit-text-fill-color: #000; /* Fix for iOS */
 }
-
 
 /* Remove border when focused (optional) */
 .chat-input:focus-within {
