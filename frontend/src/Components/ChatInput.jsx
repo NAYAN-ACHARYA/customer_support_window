@@ -35,8 +35,8 @@ const ChatInput = ({
     content: "",
     autofocus: true,
     onUpdate({ editor }) {
-      const plainText = editor.getText();
-      setMessage(plainText);
+      const html = editor.getHTML(); // store HTML instead of plain text
+      setMessage(html);
     },
     onSelectionUpdate({ editor }) {
       setHasSelection(!editor.state.selection.empty);
@@ -44,7 +44,7 @@ const ChatInput = ({
   });
 
   useEffect(() => {
-    if (editor && message !== editor.getText()) {
+    if (editor && message !== editor.getHTML()) {
       editor.commands.setContent(message);
     }
   }, [message, editor]);
@@ -77,6 +77,16 @@ const ChatInput = ({
 
   const isEditorEmpty =
     !editor || editor.getText().trim() === "";
+
+  const handleSend = () => {
+    if (!editor) return;
+    const html = editor.getHTML();
+    if (html && html !== "<p></p>") {
+      handleTextSend(html); // send HTML content
+      editor.commands.clearContent();
+      setMessage("");
+    }
+  };
 
   return (
     <div className="chat-input-container" style={{ position: "relative" }}>
@@ -150,12 +160,7 @@ const ChatInput = ({
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            const plainText = editor?.getText();
-            if (plainText?.trim() !== "") {
-              handleTextSend(plainText);
-              editor.commands.clearContent();
-              setMessage("");
-            }
+            handleSend();
           }
         }}
       >
@@ -172,14 +177,7 @@ const ChatInput = ({
 
         <button
           className="send-button"
-          onClick={() => {
-            const plainText = editor?.getText();
-            if (plainText?.trim() !== "") {
-              handleTextSend(plainText);
-              editor.commands.clearContent();
-              setMessage("");
-            }
-          }}
+          onClick={handleSend}
           style={{
             marginLeft: "auto",
             display: "flex",

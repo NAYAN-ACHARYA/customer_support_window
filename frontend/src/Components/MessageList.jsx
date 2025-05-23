@@ -29,8 +29,9 @@ const MessageList = ({
               className={`message ${
                 msg.sender === "You" ? "agent" : "customer"
               }`}
+              dangerouslySetInnerHTML={{ __html: msg.text }}
             >
-              {msg.text}
+              
             </div>
 
             {msg.sender === "You" && (
