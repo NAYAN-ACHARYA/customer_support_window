@@ -79,6 +79,7 @@
 
 .customer {
   background-color: #f1f0f0;
+  color:black;
   align-self: flex-start;
   width: auto;
 }
@@ -88,6 +89,7 @@
   align-self: flex-end;
   text-align: right;
   width: auto;
+  color:black;
 }
 
 /* Avatar styles */
