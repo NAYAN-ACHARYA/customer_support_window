@@ -83,3 +83,31 @@
   white-space: nowrap;
   margin-left: auto;
 }
+
+.sidebar-toggle-btn {
+  display: none; /* Hide toggle button by default */
+}
+
+
+@media screen and (max-width: 768px) {
+  .sidebar-toggle-btn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #ddd;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+
+
