@@ -9,6 +9,13 @@
   justify-content: flex-start;
 }
 
+@media (max-width: 768px) {
+  .copilot-section {
+    width: 100% !important;
+    min-width: unset; /* remove min-width restriction */
+    padding: 20px; /* optional */
+  }
+}
 
 .copilot-header {
   z-index: 2;
