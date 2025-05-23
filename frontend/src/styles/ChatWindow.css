@@ -141,39 +141,23 @@
 
 /* Input Area */
 .chat-input-area {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background-color: white;
   border-top: 1px solid #ddd;
-  padding: 10px;
-  background-color:white;
-
-  height: 120px; /* or whatever fixed height you want */
 }
 
 .chat-input {
-  flex-grow: 1;          /* fill all vertical space in chat-input-area */
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  font-size: 1.1em;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  min-height: 58px;
-  max-height: 50%;     /* use full height of parent */
-  overflow-y: auto;
-  cursor: text;
+  border-radius: 2px;
+  background-color: transparent;
 }
 
-/* Target the Tiptap editor's editable content */
 .chat-input .ProseMirror {
-  flex-grow: 1;          /* fill the container */
+  background-color: transparent;
+  border: none;
   outline: none;
-  min-height: 0;         /* prevent shrinking */
-  overflow-y: auto;      /* allow scrolling inside editor */
-  white-space: pre-wrap;
-  word-break: break-word;
+  padding-left: 10px;
 }
+
 
 /* Remove border when focused (optional) */
 .chat-input:focus-within {

@@ -45,16 +45,18 @@ const Sidebar = ({ chatsData, selectedChat, setSelectedChat }) => {
                   selectedChat.id === chat.id ? "active" : ""
                 }`}
                 onClick={() => {
-  setSelectedChat(chat);
-  if (window.innerWidth <= 768) {
-    setSidebarVisible(false); // Hide sidebar only on mobile
-  }
-}}
-
+                  setSelectedChat(chat);
+                  if (window.innerWidth <= 768) {
+                    setSidebarVisible(false); // Hide sidebar only on mobile
+                  }
+                }}
               >
                 <div
                   className="chat-avatar"
-                  style={{ backgroundColor: getDarkColor(chat.name), color: "#fff" }}
+                  style={{
+                    backgroundColor: getDarkColor(chat.name),
+                    color: "#fff",
+                  }}
                 >
                   {chat.name.charAt(0).toUpperCase()}
                 </div>
