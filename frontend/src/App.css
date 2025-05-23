@@ -16,7 +16,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .app {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .sidebar,

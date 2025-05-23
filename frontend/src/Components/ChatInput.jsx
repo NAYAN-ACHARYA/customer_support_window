@@ -9,6 +9,7 @@ import {
   FaRobot,
   FaRegClipboard,
 } from "react-icons/fa";
+import {FiSend} from "react-icons/fi";
 import AIMenu from "./AImenu";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -178,20 +179,21 @@ const ChatInput = ({
         className="chat-toolbar"
       >
         <div className="chat-icons" style={{ display: "flex", gap: "12px" }}>
-          <FaSmile className="chat-icon" />
-          <FaPaperclip className="chat-icon" />
-          <FaMicrophone className="chat-icon" />
+          <FaSmile className="chat-icon" onClick={()=>window.alert(`feature ye to come`)}/>
+          <FaPaperclip className="chat-icon" onClick={()=>window.alert(`feature ye to come`)} />
+          <FaMicrophone className="chat-icon" onClick={()=>window.alert(`feature ye to come`)}/>
         </div>
-        <button
-          className="send-button"
-          onClick={() => {
-            handleTextSend();
-            editor.commands.clearContent();
-            setMessage("");
-          }}
-        >
-          Send
-        </button>
+        
+<button
+  className="send-button"
+  onClick={() => {
+    handleTextSend();
+    editor.commands.clearContent();
+    setMessage("");
+  }}
+>
+  Send <FiSend style={{ marginLeft: '6px', verticalAlign: 'middle' }} />
+</button>
       </div>
     </div>
   );
