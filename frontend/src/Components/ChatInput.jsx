@@ -150,6 +150,14 @@ const ChatInput = ({
       {/* Editor input */}
       <div
   className="chat-input"
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleTextSend();
+      editor.commands.clearContent();
+      setMessage("");
+    }
+  }}
   onFocus={() => setIsFocused(true)}
   onBlur={() => setTimeout(() => setIsFocused(false), 150)}
   style={{
