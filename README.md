@@ -3,7 +3,7 @@
 
 ## Live Demo
 
-Check out the live version of this app here:  
+chekcout live version deployed using vercel here: 
 [live link](https://customer-support-window-gaci.vercel.app/)
 
 
@@ -11,7 +11,7 @@ Check out the live version of this app here:
 
 ## Project Overview
 
-This React-based project simulates an AI Copilot-enabled customer service chat interface. It offers a responsive, interactive, and user-friendly experience, mimicking real-time conversations between a user and AI-powered support.
+This project is a React-based customer service chat app that features an AI Copilot. It’s designed to feel like a real-time conversation between users and support, with a clean, responsive interface that works smoothly on both desktop and mobile.
 
 ---
 
