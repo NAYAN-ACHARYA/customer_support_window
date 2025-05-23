@@ -6,10 +6,9 @@ import {
   FaBold,
   FaItalic,
   FaRegKeyboard,
-  FaRobot,
   FaRegClipboard,
 } from "react-icons/fa";
-import {FiSend} from "react-icons/fi";
+import { FiSend } from "react-icons/fi";
 import AIMenu from "./AImenu";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -19,11 +18,10 @@ const ChatInput = ({
   setMessage,
   handleTextSend,
   isFocused,
-  setIsFocused
+  setIsFocused,
 }) => {
-  const [isHover, setIsHover] = React.useState(false);
   const [hasSelection, setHasSelection] = useState(false);
-  const [copyMessage, setCopyMessage] = useState(""); // For copy success message
+  const [copyMessage, setCopyMessage] = useState("");
   const [showCopyMsg, setShowCopyMsg] = useState(false);
 
   const editor = useEditor({
@@ -31,10 +29,14 @@ const ChatInput = ({
     content: message,
     onUpdate: ({ editor }) => {
       setMessage(editor.getHTML());
-      setHasSelection(editor.state.selection?.from !== editor.state.selection?.to);
+      setHasSelection(
+        editor.state.selection?.from !== editor.state.selection?.to
+      );
     },
     onSelectionUpdate: ({ editor }) => {
-      setHasSelection(editor.state.selection?.from !== editor.state.selection?.to);
+      setHasSelection(
+        editor.state.selection?.from !== editor.state.selection?.to
+      );
     },
   });
 
@@ -44,7 +46,6 @@ const ChatInput = ({
     }
   }, [message, editor]);
 
-  // Hide copy message after 3 seconds with fade out
   useEffect(() => {
     if (showCopyMsg) {
       const timeout = setTimeout(() => setShowCopyMsg(false), 3000);
@@ -58,7 +59,8 @@ const ChatInput = ({
   const copyToClipboard = () => {
     if (editor) {
       const plainText = editor.state.doc.textContent;
-      navigator.clipboard.writeText(plainText)
+      navigator.clipboard
+        .writeText(plainText)
         .then(() => {
           setCopyMessage("Copied to clipboard!");
           setShowCopyMsg(true);
@@ -75,7 +77,7 @@ const ChatInput = ({
 
   return (
     <div className="chat-input-container" style={{ position: "relative" }}>
-      {/* Floating toolbar */}
+      {/* Floating formatting toolbar */}
       {isFocused && (
         <div
           className="floating-box formatting-toolbar"
@@ -102,7 +104,8 @@ const ChatInput = ({
                 onClick={toggleBold}
                 type="button"
                 aria-label="Bold"
-                className="format-btn">
+                className="format-btn"
+              >
                 <FaBold />
               </button>
 
@@ -110,16 +113,17 @@ const ChatInput = ({
                 onClick={toggleItalic}
                 type="button"
                 aria-label="Italic"
-               className="format-btn">
+                className="format-btn"
+              >
                 <FaItalic />
               </button>
 
-              {/* Copy to Clipboard */}
               <button
                 onClick={copyToClipboard}
                 type="button"
                 aria-label="Copy to Clipboard"
-                className="format-btn">
+                className="format-btn"
+              >
                 <FaRegClipboard />
               </button>
             </>
@@ -137,71 +141,83 @@ const ChatInput = ({
             </>
           )}
 
-          {/* Copy message box */}
-          {showCopyMsg && (
-            <div
-            >
-              {copyMessage}
-            </div>
-          )}
+          {showCopyMsg && <div>{copyMessage}</div>}
         </div>
       )}
 
       {/* Editor input */}
       <div
-  className="chat-input"
-  onKeyDown={(e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleTextSend();
-      editor.commands.clearContent();
-      setMessage("");
-    }
-  }}
-  onFocus={() => setIsFocused(true)}
-  onBlur={() => setTimeout(() => setIsFocused(false), 150)}
-  style={{
-    position: "relative",
-    maxHeight: "150px",   // or any height you prefer
-    overflowY: "auto",
-  }}
->
-  {isEditorEmpty && (
-    <div
-      style={{
-        position: "absolute",
-        color: "grey",
-        padding: "8px",
-        pointerEvents: "none",
-      }}
-    >
-      Start typing...
-    </div>
-  )}
-  <EditorContent editor={editor} />
-</div>
-
+        className="chat-input"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            const plainText = editor.getText();
+            if (plainText.trim() !== "") {
+              handleTextSend(plainText);
+            }
+            editor.commands.clearContent();
+            setMessage("");
+          }
+        }}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setTimeout(() => setIsFocused(false), 150)}
+        style={{
+          position: "relative",
+          maxHeight: "150px",
+          overflowY: "auto",
+        }}
+      >
+        {isEditorEmpty && (
+          <div
+            style={{
+              position: "absolute",
+              color: "grey",
+              padding: "8px",
+              pointerEvents: "none",
+            }}
+          >
+            Start typing...
+          </div>
+        )}
+        <EditorContent editor={editor} />
+      </div>
 
       {/* Chat toolbar */}
-      <div
-        className="chat-toolbar"
-      >
+      <div className="chat-toolbar" style={{ marginTop: "8px" }}>
         <div className="chat-icons" style={{ display: "flex", gap: "12px" }}>
-          <FaSmile className="chat-icon" onClick={()=>window.alert(`feature ye to come`)}/>
-          <FaPaperclip className="chat-icon" onClick={()=>window.alert(`feature ye to come`)} />
-          <FaMicrophone className="chat-icon" onClick={()=>window.alert(`feature ye to come`)}/>
+          <FaSmile
+            className="chat-icon"
+            onClick={() => window.alert(`feature yet to come`)}
+          />
+          <FaPaperclip
+            className="chat-icon"
+            onClick={() => window.alert(`feature yet to come`)}
+          />
+          <FaMicrophone
+            className="chat-icon"
+            onClick={() => window.alert(`feature yet to come`)}
+          />
         </div>
-        
-<button
-  className="send-button"
-  onClick={() => {
-    handleTextSend();
-    editor.commands.clearContent();
-    setMessage("");
-  }}
->
-  Send <FiSend style={{ marginLeft: '6px', verticalAlign: 'middle' }} />
-</button>
+
+        <button
+          className="send-button"
+          onClick={() => {
+            const plainText = editor.getText();
+            if (plainText.trim() !== "") {
+              handleTextSend(plainText);
+            }
+            editor.commands.clearContent();
+            setMessage("");
+          }}
+          style={{
+            marginLeft: "auto",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+          }}
+        >
+          Send <FiSend />
+        </button>
       </div>
     </div>
   );
