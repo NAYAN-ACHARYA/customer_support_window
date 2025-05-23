@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Placeholder from "@tiptap/extension-placeholder";
 import {
   FaSmile,
   FaPaperclip,
@@ -25,23 +26,25 @@ const ChatInput = ({
   const [showCopyMsg, setShowCopyMsg] = useState(false);
 
   const editor = useEditor({
-    extensions: [StarterKit],
-    content: message,
-    onUpdate: ({ editor }) => {
-      setMessage(editor.getHTML());
-      setHasSelection(
-        editor.state.selection?.from !== editor.state.selection?.to
-      );
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder: "Start typing...",
+      }),
+    ],
+    content: "",
+    autofocus: true,
+    onUpdate({ editor }) {
+      const plainText = editor.getText();
+      setMessage(plainText);
     },
-    onSelectionUpdate: ({ editor }) => {
-      setHasSelection(
-        editor.state.selection?.from !== editor.state.selection?.to
-      );
+    onSelectionUpdate({ editor }) {
+      setHasSelection(!editor.state.selection.empty);
     },
   });
 
   useEffect(() => {
-    if (editor && message !== editor.getHTML()) {
+    if (editor && message !== editor.getText()) {
       editor.commands.setContent(message);
     }
   }, [message, editor]);
@@ -53,8 +56,8 @@ const ChatInput = ({
     }
   }, [showCopyMsg]);
 
-  const toggleBold = () => editor.chain().focus().toggleBold().run();
-  const toggleItalic = () => editor.chain().focus().toggleItalic().run();
+  const toggleBold = () => editor?.chain().focus().toggleBold().run();
+  const toggleItalic = () => editor?.chain().focus().toggleItalic().run();
 
   const copyToClipboard = () => {
     if (editor) {
@@ -73,7 +76,7 @@ const ChatInput = ({
   };
 
   const isEditorEmpty =
-    message.trim() === "" || message === "<p></p>" || editor?.isEmpty;
+    !editor || editor.getText().trim() === "";
 
   return (
     <div className="chat-input-container" style={{ position: "relative" }}>
@@ -99,40 +102,23 @@ const ChatInput = ({
           {!isEditorEmpty && hasSelection ? (
             <>
               <AIMenu />
-
-              <button
-                onClick={toggleBold}
-                type="button"
-                aria-label="Bold"
-                className="format-btn"
-              >
+              <button onClick={toggleBold} type="button" aria-label="Bold">
                 <FaBold />
               </button>
-
-              <button
-                onClick={toggleItalic}
-                type="button"
-                aria-label="Italic"
-                className="format-btn"
-              >
+              <button onClick={toggleItalic} type="button" aria-label="Italic">
                 <FaItalic />
               </button>
-
               <button
                 onClick={copyToClipboard}
                 type="button"
                 aria-label="Copy to Clipboard"
-                className="format-btn"
               >
                 <FaRegClipboard />
               </button>
             </>
           ) : (
             <>
-              <FaRegKeyboard
-                title="Type something..."
-                style={{ fontSize: "18px", color: "#888" }}
-              />
+              <FaRegKeyboard style={{ fontSize: "18px", color: "#888" }} />
               <span style={{ fontSize: "14px", color: "#888" }}>
                 {isEditorEmpty
                   ? "Start typing to enable formatting"
@@ -140,7 +126,6 @@ const ChatInput = ({
               </span>
             </>
           )}
-
           {showCopyMsg && <div>{copyMessage}</div>}
         </div>
       )}
@@ -148,66 +133,52 @@ const ChatInput = ({
       {/* Editor input */}
       <div
         className="chat-input"
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            const plainText = editor.getText();
-            if (plainText.trim() !== "") {
-              handleTextSend(plainText);
-            }
-            editor.commands.clearContent();
-            setMessage("");
-          }
-        }}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setTimeout(() => setIsFocused(false), 150)}
         style={{
           position: "relative",
           maxHeight: "150px",
           overflowY: "auto",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          padding: "8px",
+          fontSize: "16px",
+          WebkitUserSelect: "text",
+          userSelect: "text",
+        }}
+        onTouchStart={() => editor?.commands.focus()}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setTimeout(() => setIsFocused(false), 150)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            const plainText = editor?.getText();
+            if (plainText?.trim() !== "") {
+              handleTextSend(plainText);
+              editor.commands.clearContent();
+              setMessage("");
+            }
+          }
         }}
       >
-        {isEditorEmpty && (
-          <div
-            style={{
-              position: "absolute",
-              color: "grey",
-              padding: "8px",
-              pointerEvents: "none",
-            }}
-          >
-            Start typing...
-          </div>
-        )}
         <EditorContent editor={editor} />
       </div>
 
       {/* Chat toolbar */}
       <div className="chat-toolbar" style={{ marginTop: "8px" }}>
         <div className="chat-icons" style={{ display: "flex", gap: "12px" }}>
-          <FaSmile
-            className="chat-icon"
-            onClick={() => window.alert(`feature yet to come`)}
-          />
-          <FaPaperclip
-            className="chat-icon"
-            onClick={() => window.alert(`feature yet to come`)}
-          />
-          <FaMicrophone
-            className="chat-icon"
-            onClick={() => window.alert(`feature yet to come`)}
-          />
+          <FaSmile onClick={() => alert("Feature coming soon")} />
+          <FaPaperclip onClick={() => alert("Feature coming soon")} />
+          <FaMicrophone onClick={() => alert("Feature coming soon")} />
         </div>
 
         <button
           className="send-button"
           onClick={() => {
-            const plainText = editor.getText();
-            if (plainText.trim() !== "") {
+            const plainText = editor?.getText();
+            if (plainText?.trim() !== "") {
               handleTextSend(plainText);
+              editor.commands.clearContent();
+              setMessage("");
             }
-            editor.commands.clearContent();
-            setMessage("");
           }}
           style={{
             marginLeft: "auto",
